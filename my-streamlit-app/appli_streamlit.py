@@ -148,8 +148,8 @@ with st.form("form_score"):
                 st.warning("Désolé, vous n'êtes pas éligible pour le crédit. 😞")
                 #explique pourquoi pas éligible
                 
-                score_arrondi.
         except Exception as e:
             st.error(f"Une erreur est survenue lors de la prédiction: {e}")
             st.info("Veuillez vérifier que tous les champs sont correctement remplis.")
             st.info("Si le problème persiste, contactez le support à l'adresse : fidelallou@gmail.com")
+
