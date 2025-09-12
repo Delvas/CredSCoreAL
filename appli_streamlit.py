@@ -1,7 +1,6 @@
 #from calendar import c
 from hmac import new
 from click import confirm, option
-from jwt import encode
 from pyparsing import White
 import streamlit as st
 import pandas as pd
@@ -58,11 +57,11 @@ st.sidebar.write(f"**{current_time}**")
 
 
 # Chargement des modèles
-logit = joblib.load("../models/LogisticRegression_best_model_optimise_08_2025.pkl")
-RandomForest = joblib.load("../models/RandomForest_best_model_optimise_08_2025.pkl")
-Tree = joblib.load("../models/DecisionTree_best_model_optimise_08_2025.pkl")
-model_Dl = keras.models.load_model("../models/Model_deepLearning_3.keras")
-encoder = joblib.load("../models/encoder.pkl")
+logit = joblib.load("models/LogReg_opt_08_2025.pkl")
+RandomForest = joblib.load("models/Random Forest_best_model_optimise_08_2025.pkl")
+Tree = joblib.load("models/DecisionTree_best_model_optimise_08_2025.pkl")
+model_Dl = keras.models.load_model("models/Model_deepLearning_3.keras", compile=False)
+encoder = joblib.load("models/encoder.pkl")
 
 
 # Formulaire principal toujours affiché
@@ -148,7 +147,6 @@ with st.form("form_score"):
                 st.warning("Désolé, vous n'êtes pas éligible pour le crédit. 😞")
                 #explique pourquoi pas éligible
                 
-                score_arrondi.
         except Exception as e:
             st.error(f"Une erreur est survenue lors de la prédiction: {e}")
             st.info("Veuillez vérifier que tous les champs sont correctement remplis.")
