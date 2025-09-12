@@ -1,7 +1,7 @@
 #from calendar import c
 from hmac import new
 from click import confirm, option
-from jwt import encode
+#from jwt import encode
 from pyparsing import White
 import streamlit as st
 import pandas as pd
@@ -152,4 +152,5 @@ with st.form("form_score"):
             st.error(f"Une erreur est survenue lors de la prédiction: {e}")
             st.info("Veuillez vérifier que tous les champs sont correctement remplis.")
             st.info("Si le problème persiste, contactez le support à l'adresse : fidelallou@gmail.com")
+
 
