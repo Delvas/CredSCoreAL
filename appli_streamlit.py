@@ -97,8 +97,8 @@ with st.form("form_score"):
     type_pret = st.selectbox("Catégorie Prêt", ["Personnel", "Etude", "PME", "Immobilier", "Autre"])
     type_pret_enc = {"Personnel": 0, "Etude": 1, "PME": 2, "Immobilier": 3, "Autre": 4}[type_pret]
     historique_defaut = st.number_input("Historique de défaut (0 ou 1)", min_value=0, max_value=1, value=0)
-    duree_historique = st.number_input("Durée du prêt (années)", min_value=1, value=10)
     montant_demande = st.number_input("Montant demandé (FCFA)", min_value=100_000, value=2_500_000, step=100_000)
+    duree_historique = st.number_input("Durée du prêt (années)", min_value=1, value=10)
     taux_interet = st.slider("Taux d'intérêt (%)", min_value=0, max_value=100, value=15) / 100
 
     cap_remb = 1 if revenus_annuels >= montant_demande * 0.33 else 0
@@ -201,4 +201,5 @@ L’évaluation du crédit repose sur les standards internationaux du **Comité 
 
 Ces normes sont reconnues à l’échelle mondiale et servent de référence en matière de **gestion des risques bancaires**.
 """)
+
 
