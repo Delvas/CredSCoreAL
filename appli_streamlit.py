@@ -61,7 +61,7 @@ st.sidebar.success("Fallback activé ✅")
 logit = joblib.load("models/LogReg_opt_08_2025.pkl")
 RandomForest = joblib.load("models/Random Forest_best_model_optimise_08_2025.pkl")
 Tree = joblib.load("models/DecisionTree_best_model_optimise_08_2025.pkl")
-model_Dl = keras.models.load_model("Model_deepLearning_3.keras")
+model_Dl = keras.models.load_model("Model_deepLearning_3.keras",compile=False)
 encoder = joblib.load("models/encoder.pkl")
 
 # --- Fonction utilitaire ---
@@ -201,3 +201,4 @@ L’évaluation du crédit repose sur les standards internationaux du **Comité 
 
 Ces normes sont reconnues à l’échelle mondiale et servent de référence en matière de **gestion des risques bancaires**.
 """)
+
