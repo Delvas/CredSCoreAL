@@ -1,7 +1,7 @@
 # ==========================================================
 # CredScoreAL.IA - Application Streamlit de Credit Scoring
 # Version Bâle II/III avec explicabilité + fallback
-# Montants en GNF et seuil de risque configurable
+# Montants en CFA et seuil de risque configurable
 # ==========================================================
 
 import streamlit as st
@@ -46,7 +46,7 @@ st.sidebar.write(f"**{datetime.now().strftime('%d-%m-%Y %H:%M:%S')}**")
 # --- Sidebar : Paramètres risque ---
 st.sidebar.write("## ⚖️ Paramètres Risque (Bâle II/III)")
 seuil_risque = st.sidebar.number_input(
-    "Seuil de perte attendue (EL) en GNF",
+    "Seuil de perte attendue (EL) en CFA",
     min_value=1_000,
     max_value=100_000_000,
     value=10_000_000,
@@ -93,19 +93,19 @@ with st.form("form_score"):
         Classe_age = 4
 
     st.subheader("💰 Informations Financières / Bancaires")
-    revenus_annuels = st.number_input("Revenus annuels (GNF)", min_value=0, value=4_500_000, step=100_000)
+    revenus_annuels = st.number_input("Revenus annuels (CFA)", min_value=0, value=4_500_000, step=100_000)
     type_pret = st.selectbox("Catégorie Prêt", ["Personnel", "Etude", "PME", "Immobilier", "Autre"])
     type_pret_enc = {"Personnel": 0, "Etude": 1, "PME": 2, "Immobilier": 3, "Autre": 4}[type_pret]
     historique_defaut = st.number_input("Historique de défaut (0 ou 1)", min_value=0, max_value=1, value=0)
-    montant_demande = st.number_input("Montant demandé (GNF)", min_value=100_000, value=2_500_000, step=100_000)
+    montant_demande = st.number_input("Montant demandé (CFA)", min_value=100_000, value=2_500_000, step=100_000)
     duree_historique = st.number_input("Durée du prêt (années)", min_value=1, value=10)
     taux_interet = st.slider("Taux d'intérêt (%)", min_value=0, max_value=100, value=15) / 100
 
     cap_remb = 1 if revenus_annuels >= montant_demande * 0.33 else 0
-    recharge_mensuelle_moy = st.number_input("Recharge mensuelle moyenne (GNF)", min_value=0, value=50_000, step=1000)
-    solde_mobile_money_moy = st.number_input("Solde Mobile Money Moyen (GNF)", min_value=0, value=100_000, step=1000)
+    recharge_mensuelle_moy = st.number_input("Recharge mensuelle moyenne (CFA)", min_value=0, value=50_000, step=1000)
+    solde_mobile_money_moy = st.number_input("Solde Mobile Money Moyen (CFA)", min_value=0, value=100_000, step=1000)
     whatsapp = st.number_input("Ancienneté Whatsapp (années)", min_value=0, value=5)
-    facture_mensuelle = st.number_input("Montant factures mensuelles (GNF)", min_value=0, value=200_000, step=10000)
+    facture_mensuelle = st.number_input("Montant factures mensuelles (CFA)", min_value=0, value=200_000, step=10000)
     ratio_facture_charge = 12 * (facture_mensuelle / revenus_annuels) if revenus_annuels > 0 else 0
     indice_digit = (whatsapp + recharge_mensuelle_moy + solde_mobile_money_moy) / 3
     mature_finance = duree_historique / age if age > 0 else 0
@@ -171,9 +171,9 @@ with st.form("form_score"):
             st.subheader("📊 Analyse Bâle II/III")
             st.write(f"- **Probabilité de défaut (PD)** : {pd_client:.2%}")
             st.write(f"- **Perte en cas de défaut (LGD)** : {lgd:.0%}")
-            st.write(f"- **Exposition au défaut (EAD)** : {ead:,.0f} GNF")
-            st.write(f"- **Perte attendue (EL)** : {perte_attendue:,.0f} GNF")
-            st.write(f"- **Seuil de risque (configuré)** : {seuil_risque:,.0f} GNF")
+            st.write(f"- **Exposition au défaut (EAD)** : {ead:,.0f} CFA")
+            st.write(f"- **Perte attendue (EL)** : {perte_attendue:,.0f} CFA")
+            st.write(f"- **Seuil de risque (configuré)** : {seuil_risque:,.0f} CFA")
 
             if perte_attendue < seuil_risque:
                 st.success("✅ Crédit accordé : la perte attendue est inférieure au seuil de risque.")
@@ -201,6 +201,7 @@ L’évaluation du crédit repose sur les standards internationaux du **Comité 
 
 Ces normes sont reconnues à l’échelle mondiale et servent de référence en matière de **gestion des risques bancaires**.
 """)
+
 
 
 
